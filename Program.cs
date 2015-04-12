@@ -197,13 +197,6 @@ namespace XinZhao
 
         private static void LaneClear()
 		{
-			foreach (
-				var m in
-				ObjectManager.Get<Obj_AI_Minion>()
-				.Where(
-				m =>
-				m.IsValidTarget(1500) && Jungleminions.Any(name => !m.Name.StartsWith(name)) &&
-				m.Name.StartsWith("Minion"))) {
 				var useQ = Config.Item ("LaneClearUseQ").GetValue<bool> ();
 				var useW = Config.Item ("LaneClearUseW").GetValue<bool> ();
 				var useE = Config.Item ("LaneClearUseE").GetValue<bool> ();
@@ -230,13 +223,12 @@ namespace XinZhao
 						Hydra.Cast ();
 				}
 
-				if (m.Distance (Player.ServerPosition, true) <= E.Range && E.IsReady () && useE) {
+			if (Player.Distance(vMinion) && E.IsReady () && useE) {
 					{
-						E.Cast (m.ServerPosition);
+						E.Cast (vMinion);
 					}
 				}
 			}
-		}
 
         private static void JungleFarm()
         {
