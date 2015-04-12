@@ -37,7 +37,7 @@ namespace XinZhao
 		{
 			"SRU_Razorbeak", "SRU_Krug", "Sru_Crab",
 			"SRU_Baron", "SRU_Dragon", "SRU_Blue", "SRU_Red", "SRU_Murkwolf", "SRU_Gromp"     
-		}
+		};
         private static void Game_OnGameLoad(EventArgs args)
         {
             if (Player.BaseSkinName != ChampionName)
