@@ -192,6 +192,13 @@ namespace XinZhao
         }
 
         private static void LaneClear()
+			foreach (
+				var m in
+				ObjectManager.Get<Obj_AI_Minion>()
+				.Where(
+				m =>
+				m.IsValidTarget(1500) && Jungleminions.Any(name => !m.Name.StartsWith(name)) &&
+				m.Name.StartsWith("Minion")))
         {
             var useQ = Config.Item("LaneClearUseQ").GetValue<bool>();
             var useW = Config.Item("LaneClearUseW").GetValue<bool>();
@@ -213,7 +220,7 @@ namespace XinZhao
                 }
             }
 
-            if (allMinions.Count >= 2)
+            if (allMinions.Count >= 1)
             {
                 if (Tiamat.IsReady())
                     Tiamat.Cast();
@@ -222,15 +229,12 @@ namespace XinZhao
                     Hydra.Cast();
             }
 
-            if (useE && E.IsReady())
-            {
-
-                var locE = E.GetCircularFarmLocation(allMinions);
-                if (allMinions.Count == allMinions.Count(m => Player.Distance(m) < E.Range) && locE.MinionsHit >= 1 &&
-                    locE.Position.IsValid())
-                    E.Cast(locE.Position);
-            }
-
+			if (m.Distance(Me.ServerPosition, true) <= E.Range && E.IsReady() && useE)
+			{
+				{
+					Swipe.Cast(m.ServerPosition);
+				}
+			}
         }
 
         private static void JungleFarm()
@@ -253,10 +257,10 @@ namespace XinZhao
             if (useW && W.IsReady() && mobs.Count >= 1)
                 W.Cast();
 
-            if (useE && E.IsReady() && mobs.Count >= 2)
+            if (useE && E.IsReady() && mobs.Count >= 1)
                 E.CastOnUnit(mob);
 
-            if (mobs.Count >= 2)
+            if (mobs.Count >= 1)
             {
                 if (Tiamat.IsReady())
                     Tiamat.Cast();
