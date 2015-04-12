@@ -226,7 +226,7 @@ namespace XinZhao
             {
 
                 var locE = E.GetCircularFarmLocation(allMinions);
-                if (allMinions.Count == allMinions.Count(m => Player.Distance(m) < E.Range) && locE.MinionsHit >= 2 &&
+                if (allMinions.Count == allMinions.Count(m => Player.Distance(m) < E.Range) && locE.MinionsHit >= 1 &&
                     locE.Position.IsValid())
                     E.Cast(locE.Position);
             }
