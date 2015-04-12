@@ -212,6 +212,8 @@ namespace XinZhao
 							Q.Cast ();
 						if (useW && W.IsReady ())
 							W.Cast ();
+						if (Player.Distance(vMinion) && E.IsReady () && useE)
+							E.Cast (vMinion);
 					}
 				}
 
@@ -223,11 +225,7 @@ namespace XinZhao
 						Hydra.Cast ();
 				}
 
-			if (Player.Distance(vMinion) && E.IsReady () && useE) {
-					{
-						E.Cast (vMinion);
-					}
-				}
+
 			}
 
         private static void JungleFarm()
