@@ -230,9 +230,9 @@ namespace XinZhao
 						Hydra.Cast ();
 				}
 
-				if (m.Distance (Me.ServerPosition, true) <= E.Range && E.IsReady () && useE) {
+				if (m.Distance (Player.ServerPosition, true) <= E.Range && E.IsReady () && useE) {
 					{
-						Swipe.Cast (m.ServerPosition);
+						E.Cast (m.ServerPosition);
 					}
 				}
 			}
