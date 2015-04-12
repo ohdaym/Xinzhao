@@ -192,50 +192,47 @@ namespace XinZhao
         }
 
         private static void LaneClear()
+		{
 			foreach (
 				var m in
 				ObjectManager.Get<Obj_AI_Minion>()
 				.Where(
 				m =>
 				m.IsValidTarget(1500) && Jungleminions.Any(name => !m.Name.StartsWith(name)) &&
-				m.Name.StartsWith("Minion")))
-        {
-            var useQ = Config.Item("LaneClearUseQ").GetValue<bool>();
-            var useW = Config.Item("LaneClearUseW").GetValue<bool>();
-            var useE = Config.Item("LaneClearUseE").GetValue<bool>();
+				m.Name.StartsWith("Minion"))) {
+				var useQ = Config.Item ("LaneClearUseQ").GetValue<bool> ();
+				var useW = Config.Item ("LaneClearUseW").GetValue<bool> ();
+				var useE = Config.Item ("LaneClearUseE").GetValue<bool> ();
 
-            var allMinions = MinionManager.GetMinions(
+				var allMinions = MinionManager.GetMinions (
                 Player.ServerPosition, E.Range, MinionTypes.All, MinionTeam.NotAlly);
 
-            if ((useQ || useW))
-            {
-                var minionsQ = MinionManager.GetMinions(Player.ServerPosition, 400);
-                foreach (var vMinion in
-                    from vMinion in minionsQ where vMinion.IsEnemy select vMinion)
-                {
-                    if (useQ && Q.IsReady())
-                        Q.Cast();
-                    if (useW && W.IsReady())
-                        W.Cast();
-                }
-            }
+				if ((useQ || useW)) {
+					var minionsQ = MinionManager.GetMinions (Player.ServerPosition, 400);
+					foreach (var vMinion in
+                    from vMinion in minionsQ where vMinion.IsEnemy select vMinion) {
+						if (useQ && Q.IsReady ())
+							Q.Cast ();
+						if (useW && W.IsReady ())
+							W.Cast ();
+					}
+				}
 
-            if (allMinions.Count >= 1)
-            {
-                if (Tiamat.IsReady())
-                    Tiamat.Cast();
+				if (allMinions.Count >= 1) {
+					if (Tiamat.IsReady ())
+						Tiamat.Cast ();
 
-                if (Hydra.IsReady())
-                    Hydra.Cast();
-            }
+					if (Hydra.IsReady ())
+						Hydra.Cast ();
+				}
 
-			if (m.Distance(Me.ServerPosition, true) <= E.Range && E.IsReady() && useE)
-			{
-				{
-					Swipe.Cast(m.ServerPosition);
+				if (m.Distance (Me.ServerPosition, true) <= E.Range && E.IsReady () && useE) {
+					{
+						Swipe.Cast (m.ServerPosition);
+					}
 				}
 			}
-        }
+		}
 
         private static void JungleFarm()
         {
